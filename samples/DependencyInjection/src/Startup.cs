@@ -46,12 +46,12 @@ namespace src
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddTransient<ICountryService, CountryService>();
             services.AddMvc();
 
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.RegisterServices();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

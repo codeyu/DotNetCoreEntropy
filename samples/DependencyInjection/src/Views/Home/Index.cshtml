@@ -1,3 +1,4 @@
+@inject src.Services.ICountryService CountryService;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -64,7 +65,42 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
+<div class="row">
+    <div class="col-md-3">
+        <h2>Country List:</h2>
+        @if (CountryService.All().Any()) 
+        { 
+            <ul> 
+                @foreach (var country in CountryService.All().OrderBy(x => x.Name)) 
+                { 
+                    <p>@country.Name (@country.Code)</p> 
+                } 
+            </ul> 
+        }
+    </div>
+    <div class="col-md-3">
+        <h2>Country List:</h2>
+        @Html.DropDownList("Coutries", CountryService.All() 
+        .OrderBy(x => x.Name) 
+        .Select(x => new SelectListItem 
+        { 
+            Text = x.Name, 
+            Value = x.Code 
+        }))
+    </div>
+    <div class="col-md-3">
+        <h2>Country List:</h2>
+        @if (CountryService.All().Any()) 
+        { 
+            <ul> 
+                @foreach (var country in CountryService.All().OrderBy(x => x.Name)) 
+                { 
+                    <p>@country.Name (@country.Code)</p> 
+                } 
+            </ul> 
+        }
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3">
         <h2>Application uses</h2>
