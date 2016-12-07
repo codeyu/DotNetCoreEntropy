@@ -90,15 +90,7 @@
     </div>
     <div class="col-md-3">
         <h2>Country List:</h2>
-        @if (CountryService.All().Any()) 
-        { 
-            <ul> 
-                @foreach (var country in CountryService.All().OrderBy(x => x.Name)) 
-                { 
-                    <p>@country.Name (@country.Code)</p> 
-                } 
-            </ul> 
-        }
+        <country-list selected-value="CH"></country-list>
     </div>
 </div>
 <div class="row">
