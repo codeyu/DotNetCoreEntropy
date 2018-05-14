@@ -17,7 +17,7 @@
             socket = new WebSocket(uri);
             socket.onopen = function (e) { write("opened " + uri); doSend(); };
             socket.onclose = function (e) { write("closed"); };
-            socket.onmessage = function (e) { write("Received: " + e.data); socket.close(); };
+            socket.onmessage = function (e) { write("Received: " + e.data); };
             socket.onerror = function (e) { write("Error: " + e.data); };
         }
         function doSend() {
@@ -28,10 +28,21 @@
             output = document.getElementById("output");
             doConnect();
         }
+        function btnSend() {
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(document.getElementById("textInput").value);
+        }
+        else {
+            document.getElementById("spanStatus").textContent="Connection is closed";
+        }
+    }
         window.onload = onInit;
     </script>
 </head>
 <body>
+    <input type="text" id="textInput"></input>
+    <input type="button" id="btnSend" value="Send" onclick="btnSend()"></input>
+    <span id="spanStatus"></span>
     <div id="output"></div>
 </body>
 </html>
